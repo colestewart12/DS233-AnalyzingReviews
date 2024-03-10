@@ -33,11 +33,8 @@ class TwitterPositive:
 def main():
     # this is for testing only
     obj = TwitterPositive()
-    if obj.evaluateTweet("DATA 233 is a wonderful class!") >= 0.5:
-        print("Great, it is positive")
-    else:
-        print("negative")
-
+    score = obj.evaluateTweet("DATA 233 is a wonderful class!")
+    print(f"The score is {score}")
 
 if __name__ == "__main__":
     main()

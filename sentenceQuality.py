@@ -25,9 +25,12 @@ class sentenceQuality():
         for char in tweet:
             characters += 1
         readability = 4.71 * (characters / words) + 0.5 * (words / sentences) - 21.43
+        l = (characters / words) * 100
+        s = (sentences / words) * 100
+        coleman_liau_index = 0.0588 * l - 0.296 * s - 15.8
         subjectivity = blob.sentiment.subjectivity
         polarity = blob.sentiment.polarity
-        return [readability, subjectivity, polarity, words]
+        return [readability, subjectivity, polarity, words, coleman_liau_index]
 
     def calculateQuality(self, scores):
         # please implement this function to calculate a final quality score between 0 and 1
@@ -40,11 +43,13 @@ class sentenceQuality():
         # Get value between 0 and 1
         polarity = (polarity_score + 1.0) / 2.0
         words = scores[3]
+        coleman_liau_index = scores[4]
 
         # High school level
         max_readability = 10
         max_subjectivity = 1.0
         max_polarity = 1.0
+        max_coleman_liau_index = 20.0 #most values will be under 20
         # Maxes out at 100 words, everything higher will get 100
         max_words = 100.0
 
@@ -52,17 +57,20 @@ class sentenceQuality():
         normalized_subjectivity = min(max(subjectivity / max_subjectivity, 0), 1)
         normalized_polarity = min(max(polarity / max_polarity, 0), 1)
         normalized_words = min(max(words / max_words, 0), 1)
+        normalized_coleman_liau_index = min(max(coleman_liau_index / max_coleman_liau_index, 0), 1)
 
-        weight_readability = 0.4
+        weight_readability = 0.2
         weight_subjectivity = 0.3
         weight_polarity = 0.2
         weight_words = 0.1
+        weight_coleman_liau_index = 0.2
 
         overall_score = (
                 weight_readability * normalized_readability +
                 weight_subjectivity * normalized_subjectivity +
                 weight_polarity * normalized_polarity +
-                weight_words * normalized_words
+                weight_words * normalized_words + 
+                weight_coleman_liau_index * normalized_coleman_liau_index
         )
 
         return overall_score

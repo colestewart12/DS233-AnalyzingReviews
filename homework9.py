@@ -48,6 +48,7 @@ xs = [x for x in range(1000)]
 ys = [2 * x for x in xs]
 x_train, x_test, y_train, y_test = train_test_split(xs, ys, 0.25)
 
+
 # Make sure the datasets are the right lengths
 # assert len(x_train) == len(y_train) == 750
 # assert len(x_test) == len(y_test) == 250
@@ -79,6 +80,5 @@ def precision(tp: int, fp: int, fn: int, tn: int) -> float:
 
 def recall(tp: int, fp: int, fn: int, tn: int) -> float:
     return tp / (tp + fn)
-
 
 # assert recall(70, 4930, 13930, 981070) == 0.005

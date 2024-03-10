@@ -1,6 +1,6 @@
 import requests
 
-url = "https://api.yelp.com/v3/businesses/SvpZFYnWANObpJW6MTEZig/reviews?limit=50&sort_by=yelp_sort"
+url = "https://api.yelp.com/v3/businesses/search?location=Tacoma&term=food&categories=%22burgers%22&sort_by=best_match&limit=20"
 
 headers = {
     "accept": "application/json",

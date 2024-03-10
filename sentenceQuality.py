@@ -1,6 +1,5 @@
-# name 1:
-# name 2:
-# name 3:
+# name 1: Cole Stewart
+# name 2: Stuart Gavidia
 
 from textblob import TextBlob
 

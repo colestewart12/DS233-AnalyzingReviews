@@ -9,4 +9,7 @@ headers = {
 
 response = requests.get(url, headers=headers)
 
-print(response.text)
+restaurants = response.json()
+
+for restaurant in restaurants['businesses']:
+    print(restaurant['id'])

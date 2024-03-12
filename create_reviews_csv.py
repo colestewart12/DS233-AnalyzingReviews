@@ -36,8 +36,6 @@ def add_reviews_to_csv(new_reviews, csv_fil):
             writer.writeheader()
 
         for review in new_reviews['reviews']:
-            print(review['text'])
-            print(review['rating'])
             writer.writerow({
                 'text': review['text'],
                 'rating': review['rating']

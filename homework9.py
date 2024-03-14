@@ -1,3 +1,4 @@
+import csv
 import random
 from typing import TypeVar, List, Tuple
 
@@ -82,3 +83,24 @@ def recall(tp: int, fp: int, fn: int, tn: int) -> float:
     return tp / (tp + fn)
 
 # assert recall(70, 4930, 13930, 981070) == 0.005
+
+
+# Function to read CSV file
+def read_csv_file(filename):
+    data = []
+    with open(filename, 'r', newline='', encoding='utf-8') as csvfile:
+        reader = csv.DictReader(csvfile)
+        for row in reader:
+            data.append(row)
+    return data
+
+
+
+csv_data = read_csv_file("reviews.csv")
+
+texts = [row['text'] for row in csv_data]
+ratings = [int(row['rating']) for row in csv_data]
+
+x_trains, x_tests, y_trains, y_tests = train_test_split(texts, ratings, 0.25)
+
+print(x_trains, y_trains, x_tests, y_tests)

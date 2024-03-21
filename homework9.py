@@ -95,12 +95,26 @@ def read_csv_file(filename):
     return data
 
 
-
-csv_data = read_csv_file("reviews.csv")
+csv_data = read_csv_file("rating_categories.csv")
 
 texts = [row['text'] for row in csv_data]
-ratings = [int(row['rating']) for row in csv_data]
+ratings = [(row['rating']) for row in csv_data]
 
 x_trains, x_tests, y_trains, y_tests = train_test_split(texts, ratings, 0.25)
 
-print(x_trains, y_trains, x_tests, y_tests)
+
+# Write train data to CSV
+with open('train_data.csv', 'w', newline='', encoding='utf-8') as train_csv_file:
+    writer = csv.writer(train_csv_file)
+    writer.writerow(['text', 'rating'])  # Write header
+    for text, rating in zip(x_trains, y_trains):
+        writer.writerow([text, rating])
+
+# Write test data to CSV
+with open('test_data.csv', 'w', newline='', encoding='utf-8') as test_csv_file:
+    writer = csv.writer(test_csv_file)
+    writer.writerow(['text', 'rating'])  # Write header
+    for text, rating in zip(x_tests, y_tests):
+        writer.writerow([text, rating])
+
+print("CSV files created successfully.")

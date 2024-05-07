@@ -48,7 +48,7 @@ class sentenceQuality():
         max_readability = 10
         max_subjectivity = 1.0
         max_polarity = 1.0
-        max_coleman_liau_index = 20.0 #most values will be under 20
+        max_coleman_liau_index = 20.0  # most values will be under 20
         # Maxes out at 100 words, everything higher will get 100
         max_words = 100.0
 
@@ -68,7 +68,7 @@ class sentenceQuality():
                 weight_readability * normalized_readability +
                 weight_subjectivity * normalized_subjectivity +
                 weight_polarity * normalized_polarity +
-                weight_words * normalized_words + 
+                weight_words * normalized_words +
                 weight_coleman_liau_index * normalized_coleman_liau_index
         )
 
